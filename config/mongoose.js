@@ -4,7 +4,7 @@ import { initGridFS } from "./gridFS.js";
 
 dotenv.config();
 
-export const mongoURI = process.env.MONGO_URI;
+const mongoURI = process.env.MONGO_URI;
 
 const conn = mongoose.createConnection(mongoURI, {
 	// useCreateIndex: true,

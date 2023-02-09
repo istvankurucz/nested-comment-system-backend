@@ -18,17 +18,12 @@ conn.once("open", () => {
 });
 export { conn };
 
-export default function connectToDb() {
-	mongoose.connect(
-		mongoURI,
-		{
-			// useCreateIndex: true,
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-		},
-		(e) => {
-			if (e) console.log("Error connecting to DB.\n", e);
-			else console.log("Connected to DB");
-		}
-	);
+export default async function connectToDb() {
+	try {
+		const conn = await mongoose.connect(mongoURI);
+
+		console.log("MongoDB connected: ", conn.connection.host);
+	} catch (e) {
+		Promise.reject("Error connecting to DB.\n", e);
+	}
 }

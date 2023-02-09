@@ -13,9 +13,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// MongoDB
-connectToDb();
-
 // Routing
 app.use("/users", userRoute);
 app.use("/posts", postRoute);
@@ -29,4 +26,9 @@ app.use((err, req, res, next) => {
 
 // App listener
 const port = process.env.PORT || 3001;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+// MongoDB
+connectToDb()
+	.then(() => {
+		app.listen(port, () => console.log(`Listening on port ${port}`));
+	})
+	.catch((e) => console.log(e));

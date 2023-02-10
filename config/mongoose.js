@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import Grid from "gridfs-stream";
-// import GridFS from "./gridFS.js";
 import * as dotenv from "dotenv";
-// import { initGridFS } from "./gridFS.js";
 
 dotenv.config();
 
@@ -15,7 +13,9 @@ class GridFS {
 		this.gridFsBucket = null;
 	}
 }
+
 const gridFs = new GridFS();
+
 const conn = mongoose.createConnection(mongoURI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,

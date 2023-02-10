@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 import Grid from "gridfs-stream";
+import GridFS from "./gridFS.js";
 import * as dotenv from "dotenv";
 
 dotenv.config();
 
 const mongoURI = process.env.MONGO_URI;
 
-let gfs = null,
-	gridFsBucket = null;
+const gridFs = new GridFS();
+
 export default async function connectToDb() {
 	try {
 		// Connect to MongoDB
@@ -23,18 +24,18 @@ export default async function connectToDb() {
 			useUnifiedTopology: true,
 		});
 		await conn.once("open", () => {
-			gridFsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+			gridFs.gridFsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
 				bucketName: "uploadss",
 			});
 
-			gfs = Grid(conn.db, mongoose.mongo);
-			gfs.collection("uploads");
+			gridFs.gfs = Grid(conn.db, mongoose.mongo);
+			gridFs.gfs.collection("uploads");
 
-			console.log("GridFS: ", gfs);
+			console.log("GridFS: ", gridFs.gfs);
 		});
 	} catch (e) {
 		Promise.reject("Error connecting to DB.\n", e);
 	}
 }
 
-export { gfs, gridFsBucket };
+export { gridFs };

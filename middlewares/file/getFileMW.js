@@ -1,4 +1,4 @@
-import { gridFsBucket } from "../../config/mongoose.js";
+import { gridFs } from "../../config/mongoose.js";
 
 export default async function getFileMW(req, res) {
 	const { fileId } = req.params;
@@ -10,7 +10,7 @@ export default async function getFileMW(req, res) {
 		if (!file) return res.send("No image was found.");
 
 		if (file.contentType.includes("image") || show === "true") {
-			const readStream = gridFsBucket.openDownloadStream(file._id);
+			const readStream = gridFs.gridFsBucket.openDownloadStream(file._id);
 			return readStream.pipe(res);
 		} else {
 			return res.send(file);

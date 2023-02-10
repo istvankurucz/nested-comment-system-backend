@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { gridFsBucket } from "../../config/mongoose.js";
+import { gridFs } from "../../config/mongoose.js";
 
 export default function deleteFileMW(hasNext = false) {
 	return async (req, res, next) => {
@@ -10,7 +10,7 @@ export default function deleteFileMW(hasNext = false) {
 		}
 
 		try {
-			await gridFsBucket.delete(new mongoose.Types.ObjectId(imgId));
+			await gridFs.gridFsBucket.delete(new mongoose.Types.ObjectId(imgId));
 			if (!hasNext) return res.send(`File deleted with ID: ${imgId}`);
 			else return next();
 		} catch (e) {

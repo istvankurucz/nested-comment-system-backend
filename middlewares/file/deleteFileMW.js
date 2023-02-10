@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { gridFs } from "../../config/mongoose.js";
+// import { gridFsBucket } from "../../config/mongoose.js";
 
 export default function deleteFileMW(hasNext = false) {
 	return async (req, res, next) => {

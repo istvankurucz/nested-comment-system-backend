@@ -1,3 +1,4 @@
+// import { gridFsBucket } from "../../config/mongoose.js";
 import { gridFs } from "../../config/mongoose.js";
 
 export default async function getFileMW(req, res) {

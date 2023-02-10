@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import { initGridFS } from "./gridFS.js";
+import { gfs, initGridFS } from "./gridFS.js";
 
 dotenv.config();
 
@@ -23,6 +23,8 @@ export default async function connectToDb() {
 		const conn = await mongoose.connect(mongoURI);
 
 		console.log("MongoDB connected: ", conn.connection.host);
+
+		console.log("GridFS: ", gfs);
 	} catch (e) {
 		Promise.reject("Error connecting to DB.\n", e);
 	}

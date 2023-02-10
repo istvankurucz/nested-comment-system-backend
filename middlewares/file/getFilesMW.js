@@ -1,4 +1,4 @@
-import { gfs } from "../../config/gridFS.js";
+import { gfs } from "../../config/mongoose.js";
 
 export default async function (req, res, next) {
 	try {

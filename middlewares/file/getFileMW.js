@@ -1,4 +1,4 @@
-import { gridFsBucket } from "../../config/gridFS.js";
+import { gridFsBucket } from "../../config/mongoose.js";
 
 export default async function getFileMW(req, res) {
 	const { fileId } = req.params;
